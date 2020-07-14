@@ -27,7 +27,6 @@ var domEvents = new THREEx.DomEvents(camera, renderer.domElement);
 var box_model
 
 var loader = new THREE.GLTFLoader();
-
 loader.load('perseverance.gltf', function(gltf){
 //   car = gltf.scene.children[0];
 //   car.scale.set(0.5,0.5,0.5);
@@ -56,7 +55,7 @@ scene.add(light);
 
 var controls = new THREE.OrbitControls(camera);
 
-controls.addEventListener('change', renderer);
+// controls.addEventListener('change', renderer);
 
 
 
@@ -80,3 +79,5 @@ var render = function(){
 }
 
 render()
+
+controls.addEventListener('change', render);
