@@ -22,18 +22,28 @@ window.addEventListener('resize', () => {
 // http://localhost/thefederal/perseverence-rover/perseverance.gltf
 // http://localhost/thefederal/perseverence-rover/scene2.gltf
 
+var domEvents = new THREEx.DomEvents(camera, renderer.domElement);
+
+var box_model
+
 var loader = new THREE.GLTFLoader();
+
 loader.load('perseverance.gltf', function(gltf){
 //   car = gltf.scene.children[0];
 //   car.scale.set(0.5,0.5,0.5);
   scene.add(gltf.scene);
+
+  box_model = gltf.scene.getObjectByName( "box" )
+    console.log(box_model);
+
+    domEvents.addEventListener(box_model, 'click', function(event){
+
+        console.log("clicked")
+        
+    })
 //   animate();
 });
-// //add a sphere
-// var geometry = new THREE.SphereGeometry( 1, 10, 10 );
-// var material = new THREE.MeshLambertMaterial( {color: 0xFFCC00} );
-// var sphere = new THREE.Mesh( geometry, material );
-// scene.add( sphere );
+
 
 //add a light
 var light = new THREE.PointLight(0xFFFFFF, 1, 500);
@@ -47,6 +57,14 @@ scene.add(light);
 var controls = new THREE.OrbitControls(camera);
 
 controls.addEventListener('change', renderer);
+
+
+
+
+
+
+
+
 
 
 // Set this to be able to see the scene (Points the camera to scene and renders it)
