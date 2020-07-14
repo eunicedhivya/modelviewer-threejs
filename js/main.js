@@ -56,7 +56,7 @@ scene.add(light);
 
 var controls = new THREE.OrbitControls(camera);
 
-controls.addEventListener('change', renderer);
+// controls.addEventListener('change', renderer);
 
 
 
