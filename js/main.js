@@ -7,7 +7,7 @@ var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight
     
 var renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setClearColor("#e5e5e5");
-    renderer.setSize(window.innerWidth,window.innerHeight);
+    renderer.setSize(window.innerWidth - 20,window.innerHeight - 20);
 
 var wrap = document.getElementById("canvas-wrapper");
     wrap.appendChild(renderer.domElement);
