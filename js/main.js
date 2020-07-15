@@ -9,7 +9,8 @@ var renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setClearColor("#e5e5e5");
     renderer.setSize(window.innerWidth,window.innerHeight);
 
-document.body.appendChild(renderer.domElement);
+var wrap = document.getElementById("canvas-wrapper");
+    wrap.appendChild(renderer.domElement);
 
 window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth,window.innerHeight);
@@ -54,19 +55,16 @@ sprite2.scale.set(3, 3, 3)
 scene.add(sprite2);
 
 //add a light
-var light = new THREE.PointLight(0xFFFFFF, 1, 500);
-light.position.x = -6.322;
-light.position.y = 1.144;
-light.position.z = -0.073;
-scene.add(light);
+function addLight(source, xpos, ypos, zpos) {
+    var light = source;
+    light.position.x = xpos;
+    light.position.y = ypos;
+    light.position.z = zpos;
+    scene.add(light);
+}
 
-//add a light2
-var light2 = new THREE.DirectionalLight(0xFFFFFF, 1, 500);
-light2.position.x = 5;
-light2.position.y = 10;
-light2.position.z = 7.5;
-scene.add(light2);
-
+addLight(new THREE.PointLight(0xFFFFFF, 1, 500), -6.322, 1.144, -0.073);
+addLight(new THREE.DirectionalLight(0xFFFFFF, 1, 500), 5, 10, 7.5);
 
 
 // console.log(scene);
