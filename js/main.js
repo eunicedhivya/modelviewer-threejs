@@ -20,16 +20,17 @@ window.addEventListener('resize', () => {
 
     camera.updateProjectionMatrix();
 })
-var spriteMap = new THREE.TextureLoader().load( "img/sprite1.png" );
+var textureLoader = new THREE.TextureLoader();
+var spriteMap = textureLoader.load( "img/sprite.png" );
     spriteMap.minFilter = THREE.LinearFilter;
-    var spriteMaterial = new THREE.SpriteMaterial( { map: spriteMap2, color: 0xffffff } );
+    var spriteMaterial = new THREE.SpriteMaterial( { map: spriteMap, color: 0xffffff } );
     var sprite = new THREE.Sprite( spriteMaterial );
     sprite.position.x = -3;
     sprite.position.y = 2;
     sprite.scale.set(3, 3, 3)
     scene.add(sprite);
     
-var spriteMap2 = new THREE.TextureLoader().load( "img/sprite2.png" );
+var spriteMap2 = textureLoader.load( "img/sprite2.png" );
     spriteMap2.minFilter = THREE.LinearFilter;
     var spriteMaterial2 = new THREE.SpriteMaterial( { map: spriteMap2, color: 0xffffff } );
     var sprite2 = new THREE.Sprite( spriteMaterial2 );
@@ -37,9 +38,6 @@ var spriteMap2 = new THREE.TextureLoader().load( "img/sprite2.png" );
     sprite2.position.y = 2;
     sprite2.scale.set(3, 3, 3)
     scene.add(sprite2);
-
-
-
 sprite2.visible = false;
 
 var domEvents = new THREEx.DomEvents(camera, renderer.domElement);
