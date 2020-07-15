@@ -5,7 +5,7 @@ var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight
     camera.position.y = 1;
     camera.position.z = 5;
     
-var renderer = new THREE.WebGLRenderer({antialias: true});
+var renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setClearColor("#e5e5e5");
     renderer.setSize(window.innerWidth,window.innerHeight);
 
@@ -44,12 +44,30 @@ loader.load('perseverance.gltf', function(gltf){
 });
 
 
+var spriteMap2 = new THREE.TextureLoader().load( "img/sprite2.png" );
+spriteMap2.minFilter = THREE.LinearFilter;
+var spriteMaterial2 = new THREE.SpriteMaterial( { map: spriteMap2, color: 0xffffff } );
+var sprite2 = new THREE.Sprite( spriteMaterial2 );
+sprite2.position.x = 3;
+sprite2.position.y = 2;
+sprite2.scale.set(3, 3, 3)
+scene.add(sprite2);
+
 //add a light
 var light = new THREE.PointLight(0xFFFFFF, 1, 500);
-light.position.x = 10;
-light.position.y = 0;
-light.position.z = 25;
+light.position.x = -6.322;
+light.position.y = 1.144;
+light.position.z = -0.073;
 scene.add(light);
+
+//add a light2
+var light2 = new THREE.DirectionalLight(0xFFFFFF, 1, 500);
+light2.position.x = 5;
+light2.position.y = 10;
+light2.position.z = 7.5;
+scene.add(light2);
+
+
 
 // console.log(scene);
 
