@@ -20,26 +20,21 @@ window.addEventListener('resize', () => {
 
     camera.updateProjectionMatrix();
 })
-var textureLoader = new THREE.TextureLoader();
-var spriteMap = textureLoader.load( "img/sprite.png" );
+// Sprite function
+var sprite;
+function addSprite(source, xpos, ypos) {
+    var spriteMap = source;
     spriteMap.minFilter = THREE.LinearFilter;
     var spriteMaterial = new THREE.SpriteMaterial( { map: spriteMap, color: 0xffffff } );
-    var sprite = new THREE.Sprite( spriteMaterial );
-    sprite.position.x = -3;
-    sprite.position.y = 2;
-    sprite.scale.set(3, 3, 3)
+    sprite = new THREE.Sprite( spriteMaterial );
+    sprite.position.x = xpos;
+    sprite.position.y = ypos;
+    sprite.scale.set(3, 3, 3);
+    spriteMaterial.sizeAttenuation = true;
     scene.add(sprite);
-    
-var spriteMap2 = textureLoader.load( "img/sprite2.png" );
-    spriteMap2.minFilter = THREE.LinearFilter;
-    var spriteMaterial2 = new THREE.SpriteMaterial( { map: spriteMap2, color: 0xffffff } );
-    var sprite2 = new THREE.Sprite( spriteMaterial2 );
-    sprite2.position.x = 3;
-    sprite2.position.y = 2;
-    sprite2.scale.set(3, 3, 3)
-    scene.add(sprite2);
-sprite2.visible = false;
+}
 
+addSprite(new THREE.TextureLoader().load( "img/sprite.png" ), -3, 2)
 var domEvents = new THREEx.DomEvents(camera, renderer.domElement);
 
 var box_model, mast_cams
@@ -63,11 +58,12 @@ loader.load('perseverance.gltf', function(gltf){
         if(!mast_cams_clicked){
             console.log("mast_cams clicked")
             mast_cams_clicked = true;
-            sprite2.visible = true;
+            addSprite(new THREE.TextureLoader().load( "img/sprite2.png" ), 3, 2)
+            sprite.visible = true;
         }else{
             console.log("mast_cams clicked")
             mast_cams_clicked = false;
-            sprite2.visible = false;
+            sprite.visible = false;
         }
         
     })
