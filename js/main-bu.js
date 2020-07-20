@@ -8,7 +8,7 @@ var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight
     camera.position.z = 5;
     
 var renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
-    // renderer.setClearColor("#e5e5e5");
+    renderer.setClearColor("#e5e5e5");
     renderer.setSize(window.innerWidth - 20,window.innerHeight - 20);
 
 var wrap = document.getElementById("canvas-wrapper");
@@ -20,6 +20,21 @@ window.addEventListener('resize', () => {
 
     camera.updateProjectionMatrix();
 })
+// Sprite function
+var sprite;
+function addSprite(source, xpos, ypos) {
+    var spriteMap = source;
+    spriteMap.minFilter = THREE.LinearFilter;
+    var spriteMaterial = new THREE.SpriteMaterial( { map: spriteMap, color: 0xffffff } );
+    sprite = new THREE.Sprite( spriteMaterial );
+    sprite.position.x = xpos;
+    sprite.position.y = ypos;
+    sprite.scale.set(3, 3, 3);
+    spriteMaterial.sizeAttenuation = true;
+    scene.add(sprite);
+}
+
+addSprite(new THREE.TextureLoader().load( "img/sprite.png" ), -3, 2)
 var domEvents = new THREEx.DomEvents(camera, renderer.domElement);
 
 var box_model, mast_cams
@@ -42,16 +57,13 @@ loader.load('perseverance.gltf', function(gltf){
 
         if(!mast_cams_clicked){
             console.log("mast_cams clicked")
-            camera.position.set(-1.340 ,2.6 , 2.180);
-            camera.rotation.set(-13, -18.40, -3.20);
-            controls.update();
             mast_cams_clicked = true;
-            // sprite.visible = true;
+            addSprite(new THREE.TextureLoader().load( "img/sprite2.png" ), 3, 2)
+            sprite.visible = true;
         }else{
-            console.log("Reset")
-            controls.reset();
+            console.log("mast_cams clicked")
             mast_cams_clicked = false;
-            // sprite.visible = false;
+            sprite.visible = false;
         }
         
     })
@@ -78,7 +90,6 @@ addLight(new THREE.DirectionalLight(0xFFFFFF, 1, 500), 5, 10, 7.5);
 // console.log(scene);
 
 var controls = new THREE.OrbitControls(camera);
-controls.enableDamping = true
 
 // controls.addEventListener('change', renderer);
 
